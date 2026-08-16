@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confere seu WhatsApp — SYRA</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--verde:#45B48F;--escuro:#003D4C;--fundo:#022129;--cinza:#D8DDDB;--medio:#446863;--menta:#C5E2D4}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:'DM Sans',sans-serif;background:var(--fundo);color:var(--cinza);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:24px;line-height:1.6;
+  }
+  .card{max-width:520px}
+  .logo{height:32px;width:auto;margin:0 auto 36px;display:block;opacity:.9}
+  .icone{
+    width:84px;height:84px;margin:0 auto 28px;border-radius:24px;
+    background:linear-gradient(135deg,var(--verde),#2e8f70);
+    display:flex;align-items:center;justify-content:center;font-size:2.4rem;
+    box-shadow:0 12px 40px rgba(69,180,143,.35);
+    animation:entra .5s ease both;
+  }
+  @keyframes entra{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+  @media (prefers-reduced-motion: reduce){.icone{animation:none}}
+  h1{font-family:'DM Sans',sans-serif;color:#fff;font-size:clamp(1.5rem,4vw,2rem);margin-bottom:14px}
+  p{margin-bottom:14px}
+  p strong{color:var(--menta)}
+  .passo{
+    font-family:'DM Mono',monospace;font-size:.82rem;color:var(--menta);
+    border:1px solid var(--medio);border-radius:999px;padding:6px 14px;display:inline-block;margin-bottom:22px;
+  }
+  .dica{font-size:.9rem;opacity:.75;margin-top:26px}
+  a{color:var(--verde)}
+</style>
+</head>
+<body>
+  <div class="card">
+    <img src="logo-syra.svg" alt="SYRA Agência de IA" class="logo" onerror="this.style.display='none'">
+    <div class="icone">💬</div>
+    <span class="passo">enviado com sucesso</span>
+    <h1>Agora abre seu WhatsApp 👀</h1>
+    <p>Nosso agente de IA acabou de te mandar o <strong>template + guia de instalação</strong>.</p>
+    <p>Essa mensagem que você vai receber foi enviada por um workflow N8N — <strong>exatamente o tipo de automação que está no template</strong>. Entrega é demo. 😉</p>
+    <p class="dica">Não chegou em até 2 minutos? Confira se digitou o número com DDD certo, ou fala com a gente em <a href="https://agenciasyra.com.br">agenciasyra.com.br</a>.</p>
+  </div>
+</body>
+</html>
