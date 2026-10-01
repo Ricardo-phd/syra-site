@@ -298,6 +298,44 @@ section { position: relative; z-index: 1; }
   line-height: 1.6;
 }
 
+/* ─── MERCADO / PROVA EXTERNA ─── */
+#mercado { padding: 120px 0; border-top: 0.5px solid var(--border); }
+
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 0.5px solid var(--border);
+  border-radius: 14px; overflow: hidden;
+}
+
+.proof-item {
+  background: var(--bg);
+  padding: 40px 32px;
+}
+
+.proof-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 44px; font-weight: 300;
+  color: var(--syra-1);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+.proof-unit { font-size: 24px; }
+
+.proof-label {
+  font-size: 13px; color: var(--text2);
+  line-height: 1.65;
+}
+
+.proof-source {
+  text-align: center;
+  font-size: 11.5px; color: var(--text3);
+  max-width: 640px; margin: 36px auto 0;
+  line-height: 1.7;
+}
+
 .service-card {
   background: var(--bg);
   padding: 40px 36px;
@@ -695,7 +733,7 @@ img { max-width: 100%; height: auto; display: block; }
   .hero-sub { max-width: 100%; }
   .agent-messages { max-height: 240px; }
 
-  #trust, #servicos, #processo, #portfolio, #sobre { padding: 80px 0; }
+  #trust, #servicos, #processo, #portfolio, #sobre, #mercado { padding: 80px 0; }
   #contato { padding: 96px 0; }
 
   .trust-grid { grid-template-columns: repeat(2, 1fr); }
@@ -703,6 +741,9 @@ img { max-width: 100%; height: auto; display: block; }
 
   .services-grid { grid-template-columns: 1fr; }
   .service-card { padding: 32px 28px; }
+
+  .proof-grid { grid-template-columns: 1fr; }
+  .proof-item { padding: 30px 24px; }
 
   .cases-grid { grid-template-columns: 1fr; }
 
@@ -898,6 +939,31 @@ img { max-width: 100%; height: auto; display: block; }
       </div>
     </div>
     <p class="niche-aside fade-in">O mesmo motor por trás do Cliente Informado também opera Agenda Cheia (clínicas) e Lead Sem Espera (imobiliárias), sob consulta.</p>
+  </div>
+</section>
+
+<!-- ── MERCADO / PROVA EXTERNA ── -->
+<section id="mercado">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">O problema não é só seu</p>
+      <h2 class="section-title">O mercado jurídico<br><em>já confirmou essa dor.</em></h2>
+    </div>
+    <div class="proof-grid fade-in">
+      <div class="proof-item">
+        <div class="proof-num">91<span class="proof-unit">%</span></div>
+        <div class="proof-label">dos departamentos jurídicos já trocaram de escritório — o motivo mais citado é falta de previsibilidade, clareza e agilidade na comunicação.</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">86<span class="proof-unit">%</span></div>
+        <div class="proof-label">dos escritórios dependem de indicação e relacionamento pessoal pra conseguir cliente novo — e indicação quebra quando o cliente atual sai insatisfeito.</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-num">11<span class="proof-unit">%</span></div>
+        <div class="proof-label">dos escritórios têm estratégia formal de comunicação com o cliente. A imensa maioria ainda resolve "na mão", escritório a escritório.</div>
+      </div>
+    </div>
+    <p class="proof-source fade-in">Fontes: Legal Customer Experience Report 2025 (departamentos jurídicos) e "Como Advogados Ganham Clientes 2025", LETS Marketing 2025. O mesmo padrão aparece no dia a dia de trabalhista e previdenciário: cliente ligando toda semana pra saber "se saiu alguma coisa" no processo.</p>
   </div>
 </section>
 
