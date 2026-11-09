@@ -54,7 +54,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-hei
 .tab[aria-selected=true]{background:rgba(42,154,116,.18);border-color:rgba(143,193,172,.6);color:var(--sage2)}
 
 .stage{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:start}
-@media(max-width:920px){.stage{grid-template-columns:1fr}}
+@media(max-width:920px){.stage{grid-template-columns:1fr}.stage .log{min-height:0;max-height:430px;overflow-y:auto}}
 
 .panel{border:1px solid var(--line);border-radius:var(--r);background:var(--card);overflow:hidden}
 .panel-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:var(--card2)}
@@ -84,7 +84,7 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-hei
 .list .ok{color:var(--sage)}
 
 /* phone */
-.phone{border:1px solid var(--line2);border-radius:34px;padding:10px;background:#0a0a0a;max-width:390px;width:100%;margin:0 auto;box-shadow:0 30px 80px -30px rgba(42,154,116,.35)}
+.phone{scroll-margin-top:80px;border:1px solid var(--line2);border-radius:34px;padding:10px;background:#0a0a0a;max-width:390px;width:100%;margin:0 auto;box-shadow:0 30px 80px -30px rgba(42,154,116,.35)}
 .screen{border-radius:26px;overflow:hidden;background:#0B141A;display:flex;flex-direction:column;height:600px}
 .wa-h{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#1F2C34}
 .wa-h i{width:34px;height:34px;border-radius:50%;background:var(--ink);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;color:#fff;flex:none}
@@ -139,7 +139,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 90px;font-size:12.5px;col
 .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;align-items:center;gap:10px;background:#25D366;color:#06281A;text-decoration:none;font-weight:700;font-size:15px;padding:12px 18px 12px 14px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 .wa-float svg{width:24px;height:24px}
 @media(max-width:420px){.wa-float span{display:none}.wa-float{padding:13px}}
-@media(max-width:640px){.wrap{padding:0 16px}.final .box{padding:32px 20px}.log{min-height:0}.screen{height:540px}}
+@media(max-width:640px){.wrap{padding:0 16px}.final .box{padding:32px 20px}.screen{height:500px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
@@ -159,7 +159,7 @@ footer{border-top:1px solid var(--line);padding:32px 0 90px;font-size:12.5px;col
   <div class="wrap">
     <div class="eyebrow">Demonstração</div>
     <h1>Veja o serviço funcionando, do tribunal ao WhatsApp do cliente.</h1>
-    <p class="lead">À esquerda, o que acontece por trás e o que chega para você aprovar. À direita, o que o cliente do escritório recebe. Escolha uma frente e aperte play.</p>
+    <p class="lead">No painel, o que acontece por trás e o que chega para você aprovar. No celular, o que o cliente do escritório recebe. Escolha uma frente e acompanhe.</p>
     <span class="seal-top">● Exemplo com dados fictícios · escritório "Silva Advocacia"</span>
   </div>
 </header>
@@ -318,7 +318,7 @@ function addLog(o){
   tx.innerHTML='<small>'+(o.when||'')+'</small>'+o.h+(o.tx?'<br><span style="color:var(--muted)">'+o.tx+'</span>':'');
   if(o.raw)tx.appendChild(el('div','raw','<span style="color:var(--dim)">Texto do tribunal:</span><br>'+o.raw));
   if(o.list){var l=el('div','list');o.list.forEach(function(r){l.appendChild(el('div','', '<span>'+r[0]+'</span><span class="'+(r[2]||'')+'">'+r[1]+'</span>'))});tx.appendChild(l)}
-  ev.appendChild(ic);ev.appendChild(tx);log.appendChild(ev);return tx;
+  ev.appendChild(ic);ev.appendChild(tx);log.appendChild(ev);log.scrollTop=log.scrollHeight;return tx;
 }
 function addChat(o){
   var b;
@@ -341,7 +341,7 @@ function render(st,instant){
     var ok=el('button','btn btn-primary btn-sm','Aprovar e enviar'), ed=el('button','btn btn-ghost btn-sm','Editar'), li=el('button','btn btn-ghost btn-sm','Prefiro ligar');
     a.appendChild(ok);a.appendChild(ed);a.appendChild(li);c.appendChild(a);t2.appendChild(c);
     if(instant){a.innerHTML='<span class="done">✓ Aprovado pela Dra. Silva</span>';return false}
-    function go(txt){a.innerHTML='<span class="done">'+txt+'</span>';waiting=false;next()}
+    function go(txt){a.innerHTML='<span class="done">'+txt+'</span>';waiting=false;if(innerWidth<920)document.querySelector('.phone').scrollIntoView({behavior:'smooth',block:'start'});setTimeout(next,innerWidth<920?700:0)}
     ok.onclick=function(){go('✓ Aprovado pela Dra. Silva')};
     ed.onclick=function(){go('✓ Editado e aprovado pela Dra. Silva')};
     li.onclick=function(){a.innerHTML='<span class="done">Envio cancelado. A Dra. Silva vai ligar para a cliente. (Na demonstração, seguimos como se tivesse aprovado.)</span>';waiting=false;setTimeout(next,1400)};
@@ -353,6 +353,7 @@ function next(){
   var steps=S[cur].steps; if(i>=steps.length){clock.textContent='fim';return}
   var my=gen, st=steps[i++];
   var pause=render(st,false);
+  log.scrollTop=log.scrollHeight;
   if(pause){waiting=true;return}
   timer=setTimeout(function(){if(my===gen)next()},reduce?300:(st.chat&&st.chat.c==='in'?1500:1900));
 }
@@ -366,7 +367,7 @@ function start(s){
 }
 function all(){
   gen++;clearTimeout(timer);var s=cur;log.innerHTML='';chat.innerHTML='';chat.appendChild(el('div','day','HOJE'));
-  S[s].steps.forEach(function(st){render(st,true)});i=S[s].steps.length;clock.textContent='fim';
+  S[s].steps.forEach(function(st){render(st,true)});log.scrollTop=log.scrollHeight;i=S[s].steps.length;clock.textContent='fim';
 }
 document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){start(t.dataset.s);history.replaceState(null,'','#'+t.dataset.s)}});
 document.getElementById('play').onclick=function(){start(cur)};
